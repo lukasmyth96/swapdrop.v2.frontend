@@ -18,36 +18,25 @@ class SignUp extends React.Component {
     });
   };
 
-  handle_signup = (e, data) => {
+  handle_signup = (e) => {
     e.preventDefault();
-    fetch("http://localhost:8000/core/users/", {
+    fetch("http://localhost:8000/users/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({username: this.state.username, password: this.state.password}),
     })
       .then((res) => res.json())
       .then((json) => {
         localStorage.setItem("token", json.token);
-        this.setState({
-          logged_in: true,
-          displayed_form: "",
-          username: json.username,
-          user_id: json.user.id,
-        });
         this.props.history.push("/profile");
       });
-  };
-  display_form = (form) => {
-    this.setState({
-      displayed_form: form,
-    });
   };
 
   render() {
     return (
-      <form onSubmit={(e) => this.handle_signup(e, this.state)}>
+      <form onSubmit={(e) => this.handle_signup(e)}>
         <h4>Sign Up</h4>
         <label htmlFor="username">Username</label>
         <input

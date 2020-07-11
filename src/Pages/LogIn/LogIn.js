@@ -2,11 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
 
+import classes from './LogIn.module.css'
+
 class LogIn extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handle_login = this.handle_login.bind(this);
-  }
+
   state = {
     username: "",
     password: "",
@@ -22,39 +21,26 @@ class LogIn extends React.Component {
     });
   };
 
-  handle_login = (e, data) => {
+  handle_login = (e) => {
     e.preventDefault();
     fetch("http://localhost:8000/token-auth/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({username: this.state.username, password: this.state.password}),
     })
       .then((res) => res.json())
-      .then((json) => {
-        localStorage.setItem("token", json.token);
-        this.setState({
-          logged_in: true,
-          displayed_form: "",
-          username: json.user.username,
-          user_id: json.user.id,
-        });
+      .then(() => {
         this.props.history.push("/profile");
       });
   };
 
-  display_form = (form) => {
-    this.setState({
-      displayed_form: form,
-    });
-  };
-
   render() {
     return (
-      <div className="h-100 row justify-content-center align-items-center">
+      <div className={classes.LogInForm}>
         <h1>Welcome back!</h1>
-        <form onSubmit={(e) => this.handle_login(e, this.state)}>
+        <form onSubmit={(e) => this.handle_login(e)}>
           <h4>Log In</h4>
           <label htmlFor="username">Username</label>
           <input
