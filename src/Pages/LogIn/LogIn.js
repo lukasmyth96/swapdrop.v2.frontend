@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
 
+import axios from '../../axiosInstance'
 import classes from './LogIn.module.css'
 
 class LogIn extends React.Component {
@@ -23,17 +24,10 @@ class LogIn extends React.Component {
 
   handle_login = (e) => {
     e.preventDefault();
-    fetch("http://localhost:8000/token-auth/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({username: this.state.username, password: this.state.password}),
-    })
-      .then((res) => res.json())
-      .then(() => {
-        this.props.history.push("/profile");
-      });
+    const data = {username: this.state.username, password: this.state.password}
+    axios.post("/token-auth/", data)
+    .then(() => {this.props.history.push("/profile");})
+    .catch(() => {console.log('Error')})
   };
 
   render() {

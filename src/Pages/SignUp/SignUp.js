@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
 
+import axios from '../../axiosInstance'
+
 class SignUp extends React.Component {
   state = {
     username: "",
@@ -20,18 +22,10 @@ class SignUp extends React.Component {
 
   handle_signup = (e) => {
     e.preventDefault();
-    fetch("http://localhost:8000/users/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({username: this.state.username, password: this.state.password}),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        localStorage.setItem("token", json.token);
-        this.props.history.push("/profile");
-      });
+    const data = {username: this.state.username, password: this.state.password}
+    axios.post("/users/", data)
+    .then(() => {this.props.history.push("/profile");})
+    .catch(() => {console.log('Error')})
   };
 
   render() {
