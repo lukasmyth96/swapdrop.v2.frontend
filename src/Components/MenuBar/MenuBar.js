@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import st from "./Navbar.module.css";
 import { withRouter } from "react-router";
 
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+
+import styles from "./MenuBar.module.css";
 
 class MenuBar extends Component {
   render() {
@@ -15,7 +14,7 @@ class MenuBar extends Component {
       <Container>
         <Navbar bg="transparent" expand="lg">
           <Navbar.Brand href="/">
-            <span className={st.logo}>Swapdrop</span>
+            <span className={styles.logo}>Swapdrop</span>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse
@@ -25,17 +24,17 @@ class MenuBar extends Component {
             <Nav className="justify-content-end" activeKey="/home">
               <Nav.Item>
                 <Nav.Link eventKey="link-1">
-                  <span className={st.howItWorks}>How it works </span>
+                  <span className={styles.howItWorks}>How it works </span>
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="link-2">
-                  <span className={st.about}>About</span>
+                  <span className={styles.about}>About</span>
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Button
-                  className={st.button}
+                  className={styles.button}
                   variant="danger"
                   size="sm"
                   onClick={() => this.props.history.push("/login")}

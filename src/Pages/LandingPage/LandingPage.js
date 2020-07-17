@@ -5,40 +5,40 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { withRouter } from "react-router";
 
-import st from "./LandingPage.module.css";
-import MenuBar from "../../Components/MenuBar";
-import img from "../../img/clay-macbook-pro-15-with-touch-bar-front-view-mockup@2x.png"
+import styles from "./LandingPage.module.css";
+import MenuBar from "../../Components/MenuBar/MenuBar";
+
 class LandingPage extends Component {
   render() {
     return (
-      <div className={st.upperContainer}>
+      <div className={styles.upperContainer}>
         <Container>
-          <div className={st.items}>
-            <div className={st.rightLaptop}></div>
-            <div className={st.rightPhone}></div>
+          <div className={styles.rightImageContainer}>
+            <div className={styles.rightLaptop}></div>
+            <div className={styles.rightPhone}></div>
           </div>
-          <div className={st.MenuBarBox}>
+          <div className={styles.MenuBarBox}>
             <div className="justify-content-end">
-          <MenuBar />
+              <MenuBar />
+            </div>
           </div>
+
+          <div className={styles.text}>
+            <div className={styles.leftText}>
+              Explore. Swap. Drop. <br />A new way to shop.
+            </div>
           </div>
-        
-          <div className={st.text}>
-          <div className={st.leftText}>
-            Explore. Swap. Drop. <br />A new way to shop.
-              </div>
-              </div>
-              <div className={st.buttons}>
-          <Button
-            className={st.startNow}
-            variant="danger"
-            onClick={() => this.props.history.push("/signup")}
-          >
-            <span className={st.startNowText}>Start now {">"}</span>
-          </Button>{" "}
-          <Link href="/findoutmore">
-            <span className={st.findOutMore}>Find out more</span>
-          </Link>
+          <div className={styles.signupButtonsContainer}>
+            <Button
+              className={styles.startNow}
+              variant="danger"
+              onClick={() => this.props.history.push("/signup")}
+            >
+              <span className={styles.startNowText}>Start now {">"}</span>
+            </Button>{" "}
+            <Link href="/findoutmore">
+              <span className={styles.findOutMore}>Find out more</span>
+            </Link>
           </div>
         </Container>
       </div>
