@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import { withRouter } from "react-router";
 
 import styles from "./LandingPage.module.css";
 import MenuBar from "../../Components/MenuBar/MenuBar";
