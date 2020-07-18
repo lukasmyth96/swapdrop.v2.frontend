@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
 import LandingPage from "./Pages/LandingPage/LandingPage";
@@ -9,7 +10,7 @@ import Profile from "./Pages/Profile/Profile";
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Router>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/login" component={LogIn} />

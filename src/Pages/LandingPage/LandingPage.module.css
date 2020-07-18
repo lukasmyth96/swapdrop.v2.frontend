@@ -1,0 +1,148 @@
+
+.upperContainer {
+  width: 100vw;
+  height: 75vh;
+  font-family: 'Montserrat', sans-serif;
+  background: transparent url("../../img/Rectangle\ 1129.png") no-repeat
+    padding-box;
+  background-size: 100% 100%;
+}
+.rightImageContainer {
+  top: 20vh;
+  left: 40vw;
+  width: 60vw;
+  height: 80vh;
+  background: transparent #b31010 0% 0%;
+
+  position: absolute;
+  /*box-shadow: 0px 3px 13px #00000029;*/
+  overflow: hidden;
+}
+.text {
+  top: 40vh;
+  left: 10vw;
+  width: 30vw;
+  height: 20vh;
+  background: transparent #b31010 0% 0%;
+
+  position: absolute;
+  /*box-shadow: 0px 3px 13px #00000029;*/
+  overflow: hidden;
+}
+.signupButtonsContainer {
+  top: 75vh;
+  left: 10vw;
+  width: 25vw;
+  height: 20vh;
+  background: transparent #b31010 0% 0%;
+
+  position: absolute;
+  /*box-shadow: 0px 3px 13px #00000029;*/
+  overflow: hidden;
+}
+.MenuBarBox {
+  top: 5vh;
+  left: 0vw;
+  width: 100vw;
+  height: 15vh;
+  background: transparent #b31010 0% 0%;
+
+  position: absolute;
+  vertical-align: middle;
+  /*box-shadow: 0px 3px 13px #00000029;*/
+}
+.rightLaptop {
+  top: -100px;
+  left: -100px;
+  width: 875px;
+  height: 531px;
+  background: transparent
+    url("../../img/clay-macbook-pro-15-with-touch-bar-front-view-mockup.png")
+    center no-repeat padding-box;
+
+  background-size: cover;
+  position: absolute;
+}
+.rightPhone {
+  top: -50px;
+  left: -50px;
+  width: 229px;
+  height: 437px;
+  background: transparent url("../../img/Scene\ 6\ 3.png") center no-repeat
+    padding-box;
+
+  background-size: cover;
+  position: absolute;
+}
+
+@media (min-width: 1200px) {
+  .upperContainer {
+    width: 100vw;
+    height: 75vh;
+    background: transparent url("../../img/Rectangle\ 1129@2x.png") center
+      no-repeat padding-box;
+    background-size: 100% 100%;
+  }
+
+  .rightLaptop {
+    top: -190px;
+    left: -250px;
+    width: 1850px;
+    height: 1100px;
+    background: transparent
+      url("../../img/clay-macbook-pro-15-with-touch-bar-front-view-mockup@2x.png")
+      center no-repeat;
+
+    background-size: cover;
+    position: absolute;
+    overflow: hidden;
+  }
+  .rightPhone {
+    top: -90px;
+    left: -100px;
+    width: 445px;
+    height: 842px;
+    background: transparent url("../../img/Scene\ 6\ 3@2x.png") center no-repeat;
+
+    background-size: cover;
+    position: absolute;
+    overflow: hidden;
+  }
+}
+
+.exploreSwapDrop {
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  font-weight: 800;
+  font-size: 30px;
+  letter-spacing: 0px;
+  color: #ffffff;
+}
+
+.startNow {
+  background: #ff7600 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 36px;
+
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 4px;
+  padding-bottom: 5px;
+}
+
+.startNowText {
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  letter-spacing: 0px;
+  color: #ffffff;
+}
+
+.findOutMore {
+  color: var(--unnamed-color-616161);
+  text-align: left;
+  letter-spacing: 0px;
+  color: #616161;
+
+  margin-left: 20px;
+  margin-top: 20px;
+}

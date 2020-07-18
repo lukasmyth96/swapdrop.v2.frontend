@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import axios from "../../axiosInstance";
 
 class Profile extends Component {
@@ -16,6 +17,7 @@ class Profile extends Component {
       })
       .catch(() => {
         alert("Failed to authentificate user");
+        this.props.history.push("/login");
       });
   }
 
