@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { withRouter } from "react-router";
 
 import axios from '../../axiosInstance'
@@ -26,7 +25,10 @@ class LogIn extends React.Component {
     e.preventDefault();
     const data = {username: this.state.username, password: this.state.password}
     axios.post("/token-auth/", data)
-    .then(() => {this.props.history.push("/profile");})
+    .then((response) => {
+      localStorage.setItem('token', response.data.token);
+      this.props.history.push("/profile");
+    })
     .catch(() => {console.log('Error')})
   };
 
