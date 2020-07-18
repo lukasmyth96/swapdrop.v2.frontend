@@ -1,10 +1,8 @@
-.pageContainer {
-  background: #f7f7f7 0% 0% no-repeat padding-box;
-}
 
 .upperContainer {
   width: 100vw;
   height: 75vh;
+  font-family: 'Montserrat', sans-serif;
   background: transparent url("../../img/Rectangle\ 1129.png") no-repeat
     padding-box;
   background-size: 100% 100%;
@@ -112,11 +110,11 @@
   }
 }
 
-.leftText {
-  font: Bold 36px/44px var(--unnamed-font-family-montserrat);
+.exploreSwapDrop {
   letter-spacing: var(--unnamed-character-spacing-0);
   text-align: left;
-  font: Bold 36px/44px Montserrat;
+  font-weight: 800;
+  font-size: 30px;
   letter-spacing: 0px;
   color: #ffffff;
 }
@@ -133,21 +131,15 @@
 }
 
 .startNowText {
-  font: SemiBold var(--unnamed-font-size-18) / var(--unnamed-line-spacing-22)
-    var(--unnamed-font-family-montserrat);
   letter-spacing: var(--unnamed-character-spacing-0);
   text-align: left;
-  font: SemiBold 18px/22px Montserrat;
   letter-spacing: 0px;
   color: #ffffff;
 }
 
 .findOutMore {
-  font: Regular 16px/19px var(--unnamed-font-family-montserrat);
-  letter-spacing: var(--unnamed-character-spacing-0);
   color: var(--unnamed-color-616161);
   text-align: left;
-  font: Regular 16px/19px Montserrat;
   letter-spacing: 0px;
   color: #616161;
 

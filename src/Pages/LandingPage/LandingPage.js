@@ -22,7 +22,7 @@ class LandingPage extends Component {
           </div>
 
           <div className={styles.text}>
-            <div className={styles.leftText}>
+            <div className={styles.exploreSwapDrop}>
               Explore. Swap. Drop. <br />A new way to shop.
             </div>
           </div>
