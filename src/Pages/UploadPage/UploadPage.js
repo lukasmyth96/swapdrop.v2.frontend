@@ -24,7 +24,13 @@ class UploadPage extends Component {
       title: this.state.title,
     };
     axios
-      .post("/products/", data)
+      .post(
+          "/products/", 
+          data, 
+          { headers: { 
+              Authorization: `JWT ${localStorage.getItem("token")}` 
+            },
+      })
       .then((response) => {
         localStorage.setItem("token", response.data.token);
         this.props.history.push("/profile");
