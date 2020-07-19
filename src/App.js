@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
@@ -15,22 +15,32 @@ class App extends Component {
   };
 
   render() {
-    return (
-      <div>
-        <Router>
+    let routes = (
+      <Switch>
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/login" component={LogIn} />
+        <Route exact path="/signup" component={SignUp} />
+        <Route path="/" component={LandingPage} />
+      </Switch>
+    );
+
+    if (this.state.authenticated) {
+      routes = (
+        <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/login" component={LogIn} />
           <Route exact path="/signup" component={SignUp} />
 
-          {this.state.authenticated ? (
-            <>
-              <Route exact path="/profile" component={Profile} />
-              <Route exact path="/upload" component={UploadPage} />
-            </>
-          ) : (
-            <Redirect to="/login" />
-          )}
-        </Router>
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/upload" component={UploadPage} />
+          <Route path="/" component={LandingPage} />
+        </Switch>
+      );
+    }
+
+    return (
+      <div>
+        <Router>{routes}</Router>
       </div>
     );
   }
