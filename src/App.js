@@ -1,38 +1,36 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
+import PrivateRoute from "./hoc/PrivateRoute"
 import LandingPage from "./Pages/LandingPage/LandingPage";
 import LogIn from "./Pages/LogIn/LogIn";
 import SignUp from "./Pages/SignUp/SignUp";
 import Profile from "./Pages/Profile/Profile";
-
+import UploadPage from "./Pages/UploadPage/UploadPage";
 
 class App extends Component {
-
-  state = {
-    authenticated: localStorage.getItem("token") !== null,
-  };
-
-
+ 
   render() {
+
     return (
       <div>
         <Router>
-          <Route exact path="/" component={LandingPage} />
-          <Route exact path="/login" component={LogIn} />
-          <Route exact path="/signup" component={SignUp} />
+          <Switch>
+            <Route exact path="/" component={LandingPage} />
+            <Route exact path="/login" component={LogIn} />
+            <Route exact path="/signup" component={SignUp} />
 
-          {this.state.authenticated ?
-            <Route exact path="/profile" component={Profile} />
-            : <Redirect to="/login"/>}
-
+            <PrivateRoute>
+              <Route exact path="/profile" component={Profile} />
+              <Route exact path="/upload" component={UploadPage} />
+            </PrivateRoute>
+          </Switch>
         </Router>
       </div>
     );
   }
-
 }
 
 export default App;
