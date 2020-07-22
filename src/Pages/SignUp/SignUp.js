@@ -1,62 +1,113 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
 import { withRouter } from "react-router";
+import { Button, Form } from "semantic-ui-react";
 
 import axios from '../../axiosInstance'
+import styles from './SignUp.module.css'
 
-class SignUp extends React.Component {
-  state = {
-    username: "",
-    password: "",
-  };
+const SignUp = (props) => {
 
-  handle_change = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    this.setState((prevstate) => {
-      const newState = { ...prevstate };
-      newState[name] = value;
-      return newState;
-    });
-  };
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
-  handle_signup = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const data = {username: this.state.username, password: this.state.password}
+    setLoading(true);
+    const data = {
+      first_name: firstName,
+      last_name: lastName,
+      email: email,
+      username: username,
+      password: password
+    }
     axios.post("/users/", data)
-    .then((response) => {
-      localStorage.setItem('token', response.data.token);
-      this.props.history.push("/profile");
-    })
-    .catch(() => {console.log('Error')})
+      .then((response) => {
+        localStorage.setItem('token', response.data.token);
+        props.history.push("/profile");
+      })
+      .catch(error => setErrors(error.response.data))
+      .finally(() => setLoading(false))
   };
 
-  render() {
-    return (
-      <form onSubmit={(e) => this.handle_signup(e)}>
-        <h4>Sign Up</h4>
-        <label htmlFor="username">Username</label>
-        <input
+  const disabled = !([firstName, lastName, email, username, password].every(s => s.length > 0));
+
+  return (
+    <div className={styles.FormContainer}>
+      <Form className={styles.Form} error={Object.keys(errors).length > 0}>
+        <h2 className={styles.centered}> Sign Up </h2>
+
+        <Form.Input
+          error={errors.firstName && { content: errors.firstName }}
+          placeholder="First Name"
+          icon="mail"
+          focus
           type="text"
-          name="username"
-          value={this.state.username}
-          onChange={this.handle_change}
+          value={firstName}
+          onChange={e => setFirstName(e.target.value)}
         />
-        <label htmlFor="password">Password</label>
-        <input
+
+        <Form.Input
+          error={errors.lastName && { content: errors.lastName }}
+          placeholder="Last Name"
+          icon="mail"
+          focus
+          type="text"
+          value={lastName}
+          onChange={e => setLastName(e.target.value)}
+        />
+
+        <Form.Input
+          error={errors.email && { content: errors.email }}
+          placeholder="Email"
+          icon="mail"
+          focus
+          type="text"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+
+        <Form.Input
+          error={errors.username && { content: errors.username }}
+          placeholder="Username"
+          icon="mail"
+          focus
+          type="text"
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+        />
+
+        <Form.Input
+          error={errors.password && { content: errors.password }}
+          placeholder="Password"
+          icon="eye slash"
+          focus
           type="password"
-          name="password"
-          value={this.state.password}
-          onChange={this.handle_change}
+          value={password}
+          onChange={e => setPassword(e.target.value)}
         />
-        <input type="submit" />
-      </form>
-    );
-  }
-}
+
+        <Button
+          className={styles.centered}
+          positive
+          type="submit"
+          loading={loading}
+          disabled={disabled}
+          onClick={handleSubmit}
+        >
+          Submit
+          </Button>
+      </Form>
+    </div>
+  );
+
+
+};
+
 
 export default withRouter(SignUp);
 
-SignUp.propTypes = {
-  handle_signup: PropTypes.func.isRequired,
-};
