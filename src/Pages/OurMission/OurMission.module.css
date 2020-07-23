@@ -1,0 +1,120 @@
+.upperContainer {
+  width: 100vw;
+  height: 25vh;
+  background: transparent url("../../img/Rectangle\ 1149.png") 0% 0% no-repeat
+    padding-box;
+  background-size: 100% 100%;
+}
+
+.wardrobeLife {
+  font: Bold 36px/44px Montserrat;
+  letter-spacing: 0px;
+  color: #000000;
+}
+
+.socialClothesText {
+  text-align: left;
+  font: Regular 26px/32px Montserrat;
+  letter-spacing: 0px;
+  color: #000000;
+}
+
+.textBox {
+  top: 25vh;
+  left: 65vw;
+  width: 30vw;
+  height: auto;
+  background: transparent #b31010 0% 0%;
+
+  position: absolute;
+  /*box-shadow: 0px 3px 13px #00000029;*/
+  overflow: hidden;
+}
+
+.socialClothesBox {
+  top: 60vh;
+  left: 0vw;
+  width: 100vw;
+  height: 40vh;
+  background: transparent #b31010 0% 0%;
+
+  position: absolute;
+  /*box-shadow: 0px 3px 13px #00000029;*/
+  overflow: hidden;
+}
+
+.teamNames {
+  text-align: center;
+  font: Bold Montserrat;
+}
+
+.teamBox {
+  top: 1455px;
+  left: 0vw;
+  width: 100vw;
+  height: auto;
+  background: transparent #b31010 0% 0%;
+
+  position: absolute;
+  /*box-shadow: 0px 3px 13px #00000029;*/
+  overflow: hidden;
+}
+
+.ourTeam {
+  top: 1363px;
+  left: 40vw;
+
+  text-align: center;
+  font: Bold 43px/53px Montserrat;
+  letter-spacing: 0px;
+  color: #000000;
+}
+
+.img {
+  width: 216px;
+  height: 216px;
+  align-self: center;
+}
+
+.ourmissionTitle {
+  top: 883px;
+  left: 40vw;
+
+  text-align: center;
+  font: Bold 50px Montserrat;
+  letter-spacing: 0px;
+  color: #000000;
+}
+
+.ourmissionBox {
+  top: 883px;
+  width: 70vw;
+  align-content: center;
+  background: transparent #b31010 0% 0%;
+
+  position: absolute;
+  /*box-shadow: 0px 3px 13px #00000029;*/
+  overflow: hidden;
+}
+
+.ourmissionBody1 {
+  top: 975px;
+  left: 30vw;
+  width: 100vw;
+
+  text-align: center;
+  font: Regular 40px Montserrat;
+  letter-spacing: 0px;
+  color: #080808;
+}
+
+.ourmissionBody2 {
+  top: 1140px;
+  left: 30vw;
+  width: 100vw;
+  height: auto;
+  text-align: center;
+  font: Regular 40px Montserrat;
+  letter-spacing: 0px;
+  color: #080808;
+}
