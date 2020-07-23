@@ -1,62 +1,83 @@
-import React from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router";
+import { Button, Form, Message } from "semantic-ui-react";
 
 import axios from '../../axiosInstance'
-import classes from './LogIn.module.css'
+import styles from '../SignUp/SignUp.module.css'
 
-class LogIn extends React.Component {
+const SignUp = (props) => {
 
-  state = {
-    username: "",
-    password: "",
-  };
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
-  handle_change = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    this.setState((prevstate) => {
-      const newState = { ...prevstate };
-      newState[name] = value;
-      return newState;
-    });
-  };
-
-  handle_login = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const data = {username: this.state.username, password: this.state.password}
+    setLoading(true);
+    const data = {
+      username: username,
+      password: password
+    }
     axios.post("/token-auth/", data)
-    .then((response) => {
-      localStorage.setItem('token', response.data.token);
-      this.props.history.push("/profile");
-    })
-    .catch(() => {console.log('Error')})
+      .then((response) => {
+        localStorage.setItem('token', response.data.token);
+        props.history.push("/profile");
+      })
+      .catch(error => setErrors(error.response.data))
+      .finally(() => setLoading(false))
   };
 
-  render() {
-    return (
-      <div className={classes.LogInForm}>
-        <h1>Welcome back!</h1>
-        <form onSubmit={(e) => this.handle_login(e)}>
-          <h4>Log In</h4>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            name="username"
-            value={this.state.username}
-            onChange={this.handle_change}
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={this.state.password}
-            onChange={this.handle_change}
-          />
-          <input type="submit" />
-        </form>
-      </div>
-    );
-  }
-}
+  const disabled = !([username, password].every(s => s.length > 0));
 
-export default withRouter(LogIn);
+  return (
+    <div className={styles.FormContainer}>
+      <Form className={styles.Form} error={Object.keys(errors).length > 0}>
+        <h2 className={styles.centered}> Log In </h2>
+
+        <Form.Input
+          error={errors.username && { content: errors.username }}
+          placeholder="Username"
+          icon="users"
+          focus
+          type="text"
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+        />
+
+        <Form.Input
+          error={errors.password && { content: errors.password }}
+          placeholder="Password"
+          icon="eye slash"
+          focus
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+
+        <Message
+        error
+        header="Ooops..."
+        list={errors["non_field_errors"]}
+        />
+
+        <Button
+          className={styles.centered}
+          positive
+          type="submit"
+          loading={loading}
+          disabled={disabled}
+          onClick={handleSubmit}
+        >
+          Log In
+          </Button>
+      </Form>
+    </div>
+  );
+
+
+};
+
+
+export default withRouter(SignUp);
+

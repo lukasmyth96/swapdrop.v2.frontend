@@ -1,39 +1,21 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import { Button, Form, Image, Message } from "semantic-ui-react";
 
 import axios from "../../axiosInstance";
-import styles from "./UploadPage.module.css";
+import styles from "../SignUp/SignUp.module.css";
+import FileUploadButton from "../../Components/FileUploadButton/FileUploadButton"
 
-class UploadPage extends Component {
-  state = {
-    title: "",
-    image1: undefined,
-  };
+const UploadPage = (props) => {
+  const [title, setTitle] = useState("");
+  const [image1, setImage1] = useState();
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
-  handle_change = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    this.setState((prevstate) => {
-      const newState = { ...prevstate };
-      newState[name] = value;
-      return newState;
-    });
-  };
-
-  handleFileUpload = (e) => {
-    const name = e.target.name;
-    const file = e.target.files[0];
-    this.setState((prevstate) => {
-      const newState = { ...prevstate };
-      newState[name] = file;
-      return newState;
-    });
-  };
-
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData();
-    data.append("title", this.state.title);
-    data.append("image1", this.state.image1);
+    data.append("title", title);
+    data.append("image1", image1);
     axios
       .post("/products/", data, {
         headers: {
@@ -42,32 +24,68 @@ class UploadPage extends Component {
         },
       })
       .then((response) => {
-        localStorage.setItem("token", response.data.token);
-        this.props.history.push("/profile");
+        props.history.push("/profile");
       })
-      .catch(() => {
-        console.log("Error");
-      });
+      .catch(error => setErrors(error.response.data))
+      .finally(() => setLoading(false));
   };
 
-  render() {
-    return (
-      <div className={styles.UploadPageForm}>
-        <h1>Upload your product</h1>
-        <form onSubmit={(e) => this.handleSubmit(e)}>
-          <label htmlFor="title">Product title</label>
-          <input
-            type="text"
-            name="title"
-            value={this.state.title}
-            onChange={this.handle_change}
+  const disabled = !(title.length > 0 && image1);
+
+  return (
+    <div className={styles.FormContainer}>
+      <Form className={styles.Form} error={Object.keys(errors).length > 0}>
+        <h2 className={styles.centered}> Upload </h2>
+
+        <Form.Input
+          error={errors.title && { content: errors.title }}
+          placeholder="Title"
+          focus
+          type="text"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+        />
+
+        {image1 && 
+        <Form.Field>
+          <Image
+            src={URL.createObjectURL(image1)}
+            alt="Image 1"
+            styles={{width: "50%"}}
+            rounded
           />
-          <input type="file" name="image1" onChange={this.handleFileUpload} />
-          <input type="submit" />
-        </form>
-      </div>
-    );
-  }
+        </Form.Field>}
+
+        <Form.Field>
+          <FileUploadButton
+            text="Choose Image"
+            complete={!(typeof variable === 'undefined')}
+            onChange={e => setImage1(e.target.files[0])}
+          />
+        </Form.Field>
+
+        <Message
+        error
+        header="Ooops..."
+        list={errors["non_field_errors"]}
+        />
+
+        <Button
+          className={styles.centered}
+          positive
+          type="submit"
+          loading={loading}
+          disabled={disabled}
+          onClick={handleSubmit}
+        >
+          Upload
+          </Button>
+      </Form>
+    </div>
+  );
+
+
 }
+
 
 export default UploadPage;
