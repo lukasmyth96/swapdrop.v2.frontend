@@ -57,7 +57,7 @@ const SignUp = (props) => {
 
         <Message
         error
-        header="Something went wrong..."
+        header="Ooops..."
         list={errors["non_field_errors"]}
         />
 
