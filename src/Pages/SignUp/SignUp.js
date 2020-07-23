@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router";
-import { Button, Form } from "semantic-ui-react";
+import { Button, Form, Message } from "semantic-ui-react";
 
 import axios from '../../axiosInstance'
 import styles from './SignUp.module.css'
@@ -74,7 +74,7 @@ const SignUp = (props) => {
         <Form.Input
           error={errors.username && { content: errors.username }}
           placeholder="Username"
-          icon="mail"
+          icon="users"
           focus
           type="text"
           value={username}
@@ -91,6 +91,12 @@ const SignUp = (props) => {
           onChange={e => setPassword(e.target.value)}
         />
 
+        <Message
+        error
+        header="Something went wrong..."
+        list={errors["non_field_errors"]}
+        />
+
         <Button
           className={styles.centered}
           positive
@@ -99,7 +105,7 @@ const SignUp = (props) => {
           disabled={disabled}
           onClick={handleSubmit}
         >
-          Submit
+          Sign Up
           </Button>
       </Form>
     </div>
