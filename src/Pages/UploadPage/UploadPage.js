@@ -12,7 +12,7 @@ const UploadPage = (props) => {
   const [title, setTitle] = useState("");
   const [imageData, setImageData] = useState();
   const [imageExt, setImageExt] = useState();
-  const [imageFile, setImageFile] = useState();
+  const [croppedImageFile, setCroppedImageFile] = useState();
   const [completedCrop, setCompletedCrop] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -20,7 +20,6 @@ const UploadPage = (props) => {
 
   const onSelectFile = e => {
     if (e.target.files && e.target.files.length > 0) {
-      setImageFile(e.target.files[0])
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImageData(reader.result);
@@ -35,7 +34,7 @@ const UploadPage = (props) => {
     e.preventDefault();
     const data = new FormData();
     data.append("title", title);
-    data.append("image1", imageFile);  // needs to be file in end
+    data.append("image1", croppedImageFile); 
     axios
       .post("/products/", data, {
         headers: {
@@ -52,16 +51,14 @@ const UploadPage = (props) => {
 
   const onCropComplete = async () => {
     setIsModalOpen(false);
-    const imgElement = document.createElement('img', '_')
+    const imgElement = document.createElement('img')
     imgElement.src = imageData;
     const fileName = `product.${imageExt}`;
-    debugger
     const croppedImageFile = await getCroppedImage(imgElement, completedCrop, fileName, imageExt)
-
-    setImageFile(croppedImageFile);
+    setCroppedImageFile(croppedImageFile);
   }
 
-  const disabled = !(title.length > 0);  
+  const disabled = !(title.length > 0 && croppedImageFile);  
 
   return (
     <>
