@@ -57,7 +57,6 @@ const UploadPage = (props) => {
   };
 
   const onCropComplete = async () => {
-    debugger
     setIsModalOpen(false);
     const imgElement = document.createElement('img')
     imgElement.src = imageData;

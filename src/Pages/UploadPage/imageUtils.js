@@ -1,20 +1,28 @@
-export function getCroppedImage(image, pixelCrop, fileName) {
+export function getCroppedImage(image, crop, fileName) {
+  // crop is relative (0-100)
  
     const canvas = document.createElement('canvas');
-    canvas.width = pixelCrop.width;
-    canvas.height = pixelCrop.height;
+    debugger
+
+    const width = image.naturalWidth * crop.width / 100;
+    const height = image.naturalHeight * crop.height / 100;
+    const x = image.naturalWidth * crop.x / 100;
+    const y = image.naturalHeight * crop.y / 100;
+
+    canvas.width = width;
+    canvas.height = height;
     const ctx = canvas.getContext('2d');
    
     ctx.drawImage(
       image,
-      pixelCrop.x,
-      pixelCrop.y,
-      pixelCrop.width,
-      pixelCrop.height,
+      x,
+      y,
+      width,
+      height,
       0,
       0,
-      pixelCrop.width,
-      pixelCrop.height
+      width,
+      height
     );
   
     // As a blob

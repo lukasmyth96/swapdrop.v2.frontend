@@ -29,8 +29,8 @@ function CropModal(props) {
                     src={props.image}
                     onImageLoaded={props.onImageLoaded}
                     crop={currentCrop}
-                    onChange={c => setCurrentCrop(c)}  // called on every change
-                    onComplete={c => props.setCompletedCrop(c)}  // called only on mouse unFocus
+                    onChange={(c, percentCrop) => setCurrentCrop(percentCrop)}  // called on every change
+                    onComplete={(c, percentCrop) => props.setCompletedCrop(percentCrop)}  // called only on mouse unFocus
                     />
                 </div>
             </Modal.Content>
