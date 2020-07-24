@@ -6,35 +6,42 @@ import axios from "../../axiosInstance";
 import styles from "../SignUp/SignUp.module.css";
 import CropModal from "../../Components/CropModal/CropModal"
 import FileUploadButton from "../../Components/FileUploadButton/FileUploadButton"
+import { getCroppedImage, extractImageFileExtensionFromBase64 } from './imageUtils'
 
 const UploadPage = (props) => {
   const [title, setTitle] = useState("");
-  const [image1, setImage1] = useState();
+  const [imageData, setImageData] = useState();
+  const [imageExt, setImageExt] = useState();
+  const [imageFile, setImageFile] = useState();
+  const [completedCrop, setCompletedCrop] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const image1Ref = useRef(null);
+  const imageRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
   const onSelectFile = e => {
     if (e.target.files && e.target.files.length > 0) {
+      setImageFile(e.target.files[0])
       const reader = new FileReader();
       reader.addEventListener("load", () => {
-        setImage1(reader.result);
+        setImageData(reader.result);
+        setImageExt(extractImageFileExtensionFromBase64(reader.result));
         setIsModalOpen(true);
       });
       reader.readAsDataURL(e.target.files[0]);
     }
   };
 
-  const onImageLoad = useCallback(img => {
-    image1Ref.current = img;
+  const onImageLoaded = useCallback(img => {
+    console.log('OnImageLoaded called!!!')
+    imageRef.current = img;
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData();
     data.append("title", title);
-    data.append("image1", image1);
+    data.append("image1", imageFile);  // needs to be file in end
     axios
       .post("/products/", data, {
         headers: {
@@ -49,15 +56,27 @@ const UploadPage = (props) => {
       .finally(() => setLoading(false));
   };
 
-  const disabled = !(title.length > 0 && image1);
+  const onCropComplete = async () => {
+    debugger
+    setIsModalOpen(false);
+    const imgElement = document.createElement('img')
+    imgElement.src = imageData;
+    const croppedImageBlob = await getCroppedImage(imgElement, completedCrop, 'test.jpeg')
+    const croppedImageFile = new File([croppedImageBlob], 'test.jpeg')
+    setImageFile(croppedImageFile);
+  }
+
+  const disabled = !(title.length > 0);  
 
   return (
     <>
       <CropModal
         isModalOpen={isModalOpen}
         closeModal={() => setIsModalOpen(false)}
-        image={image1}
-        onImageLoad={onImageLoad}
+        image={imageData}
+        onImageLoad={onImageLoaded}
+        setCompletedCrop={setCompletedCrop}
+        onConfirm={() => onCropComplete()}
       />
 
       <div className={styles.FormContainer}>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types'
 import ReactCrop from "react-image-crop";
 import 'react-image-crop/dist/ReactCrop.css';
@@ -8,16 +8,13 @@ const getInitialCrop = () => ({ unit: '%', width: 50, height: 50, x: 25, y: 25, 
 
 function CropModal(props) {
 
-    const [crop, setCrop] = useState(getInitialCrop());
-    const [completedCrop, setCompletedCrop] = useState(null);
+    const [currentCrop, setCurrentCrop] = useState(getInitialCrop());
 
     const modalStyle = {
         margin: '1% 10%',
         width: '80%',
         textAlign: 'center'
     };
-
-    useEffect(() => setCrop(getInitialCrop()), [props.isModalOpen])  // reset crop on modal open/close
 
     return (
         <Transition visible={props.isModalOpen} animation="scale" duration={500}>
@@ -31,14 +28,14 @@ function CropModal(props) {
                 <ReactCrop
                     src={props.image}
                     onImageLoaded={props.onImageLoaded}
-                    crop={crop}
-                    onChange={c => setCrop(c)}
-                    onComplete={c => setCompletedCrop(c)}
+                    crop={currentCrop}
+                    onChange={c => setCurrentCrop(c)}  // called on every change
+                    onComplete={c => props.setCompletedCrop(c)}  // called only on mouse unFocus
                     />
                 </div>
             </Modal.Content>
             <Button negative onClick={props.closeModal} > Cancel </Button> 
-            <Button positive onClick={props.closeModal} > Confirm </Button> 
+            <Button positive onClick={props.onConfirm} > Confirm </Button> 
             </Modal>
       </Transition>
     );
@@ -49,6 +46,8 @@ CropModal.propTypes = {
     closeModal: PropTypes.func,
     image: PropTypes.any,
     onImageLoaded: PropTypes.func,
+    setCompletedCrop: PropTypes.func,
+    onConfirm: PropTypes.func,
 }
 
 export default CropModal;
