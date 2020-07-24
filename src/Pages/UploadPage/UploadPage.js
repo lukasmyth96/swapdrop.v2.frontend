@@ -58,10 +58,12 @@ const UploadPage = (props) => {
 
   const onCropComplete = async () => {
     setIsModalOpen(false);
-    const imgElement = document.createElement('img')
+    const imgElement = document.createElement('img', '_')
     imgElement.src = imageData;
-    const croppedImageBlob = await getCroppedImage(imgElement, completedCrop, 'test.jpeg')
-    const croppedImageFile = new File([croppedImageBlob], 'test.jpeg')
+    const fileName = `product.${imageExt}`;
+    debugger
+    const croppedImageFile = await getCroppedImage(imgElement, completedCrop, fileName, imageExt)
+
     setImageFile(croppedImageFile);
   }
 

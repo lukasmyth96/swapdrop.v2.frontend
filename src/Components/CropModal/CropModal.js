@@ -4,7 +4,7 @@ import ReactCrop from "react-image-crop";
 import 'react-image-crop/dist/ReactCrop.css';
 import { Button, Transition, Modal } from "semantic-ui-react";
 
-const getInitialCrop = () => ({ unit: '%', width: 50, height: 50, x: 25, y: 25, aspect: 1});
+const getInitialCrop = () => ({ unit: '%', width: 80, height: 80, x: 10, y: 10, aspect: 1});
 
 function CropModal(props) {
 

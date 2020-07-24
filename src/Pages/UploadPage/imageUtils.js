@@ -1,8 +1,7 @@
-export function getCroppedImage(image, crop, fileName) {
+export function getCroppedImage(image, crop, fileName, extension) {
   // crop is relative (0-100)
  
     const canvas = document.createElement('canvas');
-    debugger
 
     const width = image.naturalWidth * crop.width / 100;
     const height = image.naturalHeight * crop.height / 100;
@@ -27,10 +26,10 @@ export function getCroppedImage(image, crop, fileName) {
   
     // As a blob
     return new Promise((resolve, reject) => {
-      canvas.toBlob(file => {
-        file.name = fileName;
+      canvas.toBlob(blob => {
+        const file = new File([blob], fileName)
         resolve(file);
-      }, 'image/jpeg');
+      }, `image/${extension}`);
     });
   }
 
