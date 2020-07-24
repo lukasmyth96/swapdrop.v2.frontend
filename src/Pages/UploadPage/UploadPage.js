@@ -1,27 +1,17 @@
 import React, { useState, useRef, useCallback } from "react";
-import ReactCrop from "react-image-crop";
 import 'react-image-crop/dist/ReactCrop.css';
-import { Button, Form, Message, Transition, Modal, Image } from "semantic-ui-react";
+import { Button, Form, Message } from "semantic-ui-react";
 
 import axios from "../../axiosInstance";
 import styles from "../SignUp/SignUp.module.css";
-import './Modal.css'
+import CropModal from "../../Components/CropModal/CropModal"
 import FileUploadButton from "../../Components/FileUploadButton/FileUploadButton"
 
 const UploadPage = (props) => {
   const [title, setTitle] = useState("");
   const [image1, setImage1] = useState();
-  const [modalOpen, setModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const image1Ref = useRef(null);
-  const [crop, setCrop] = useState({
-    unit: '%',
-    width: 50,
-    height: 50,
-    x: 25,
-    y: 25,
-    aspect: 1
-  });
-  const [completedCrop, setCompletedCrop] = useState(null);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -30,13 +20,13 @@ const UploadPage = (props) => {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImage1(reader.result);
-        setModalOpen(true);
+        setIsModalOpen(true);
       });
       reader.readAsDataURL(e.target.files[0]);
     }
   };
 
-  const onLoad = useCallback(img => {
+  const onImageLoad = useCallback(img => {
     image1Ref.current = img;
   }, []);
 
@@ -61,34 +51,14 @@ const UploadPage = (props) => {
 
   const disabled = !(title.length > 0 && image1);
 
-  const inlineStyle = {
-    modal : {
-      margin: '1% 10%',
-      width: '80%',
-      textAlign: 'center'
-    }
-  };
-
   return (
     <>
-          <Transition visible={modalOpen} animation="scale" duration={500}>
-            <Modal style={inlineStyle.modal} size='large' open={modalOpen} onClose={() => setModalOpen(false)}>
-              <Modal.Header>Crop away...</Modal.Header>
-              <Modal.Content image>
-                <div style={{width: "50%", margin: "auto"}}>
-                  <ReactCrop
-                      src={image1}
-                      onImageLoaded={onLoad}
-                      crop={crop}
-                      onChange={c => setCrop(c)}
-                      onComplete={c => setCompletedCrop(c)}
-                    />
-                </div>
-              </Modal.Content>
-              <Button negative onClick={() => setModalOpen(false)} > Cancel </Button> 
-              <Button positive onClick={() => setModalOpen(false)} > Confirm </Button> 
-            </Modal>
-          </Transition>
+      <CropModal
+        isModalOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+        image={image1}
+        onImageLoad={onImageLoad}
+      />
 
       <div className={styles.FormContainer}>
         <Form className={styles.Form} error={Object.keys(errors).length > 0}>
