@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback } from "react";
 import ReactCrop from "react-image-crop";
 import 'react-image-crop/dist/ReactCrop.css';
-import { Button, Form, Message, Modal, Image } from "semantic-ui-react";
+import { Button, Form, Message, Transition, Modal, Image } from "semantic-ui-react";
 
 import axios from "../../axiosInstance";
 import styles from "../SignUp/SignUp.module.css";
@@ -71,22 +71,24 @@ const UploadPage = (props) => {
 
   return (
     <>
-
-          <Modal style={inlineStyle.modal} size='large' open={modalOpen} onClose={() => setModalOpen(false)}>
-            <Modal.Header>Crop away...</Modal.Header>
-            <Modal.Content image>
-              <ReactCrop
-                  src={image1}
-                  imageStyle={{width: "50%", margin: "auto"}}
-                  onImageLoaded={onLoad}
-                  crop={crop}
-                  onChange={c => setCrop(c)}
-                  onComplete={c => setCompletedCrop(c)}
-                />
-            </Modal.Content>
-            <Button negative onClick={() => setModalOpen(false)} > Cancel </Button> 
-            <Button positive onClick={() => setModalOpen(false)} > Confirm </Button> 
-          </Modal>
+          <Transition visible={modalOpen} animation="scale" duration={500}>
+            <Modal style={inlineStyle.modal} size='large' open={modalOpen} onClose={() => setModalOpen(false)}>
+              <Modal.Header>Crop away...</Modal.Header>
+              <Modal.Content image>
+                <div style={{width: "50%", margin: "auto"}}>
+                  <ReactCrop
+                      src={image1}
+                      onImageLoaded={onLoad}
+                      crop={crop}
+                      onChange={c => setCrop(c)}
+                      onComplete={c => setCompletedCrop(c)}
+                    />
+                </div>
+              </Modal.Content>
+              <Button negative onClick={() => setModalOpen(false)} > Cancel </Button> 
+              <Button positive onClick={() => setModalOpen(false)} > Confirm </Button> 
+            </Modal>
+          </Transition>
 
       <div className={styles.FormContainer}>
         <Form className={styles.Form} error={Object.keys(errors).length > 0}>
