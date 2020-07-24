@@ -11,8 +11,9 @@ function CropModal(props) {
     const [currentCrop, setCurrentCrop] = useState(getInitialCrop());
 
     const modalStyle = {
-        margin: '1% 10%',
-        width: '80%',
+        margin: '1% 20vw',
+        width: '60vw',
+        height: '100vh',
         textAlign: 'center'
     };
 
@@ -21,21 +22,25 @@ function CropModal(props) {
             <Modal 
             style={modalStyle} 
             open={props.isModalOpen} 
-            onClose={props.closeModal}>
+            onClose={() => {
+                setCurrentCrop(getInitialCrop())
+                props.closeModal()
+            }}>
             <Modal.Header>Crop away...</Modal.Header>
             <Modal.Content image>
-                <div style={{width: "50%", margin: "auto"}}>
+                <div style={{width: "60%", margin: "auto"}}>
                 <ReactCrop
                     src={props.image}
-                    onImageLoaded={props.onImageLoaded}
+                    imageStyle={{width: "100%"}}
                     crop={currentCrop}
                     onChange={(c, percentCrop) => setCurrentCrop(percentCrop)}  // called on every change
                     onComplete={(c, percentCrop) => props.setCompletedCrop(percentCrop)}  // called only on mouse unFocus
                     />
                 </div>
             </Modal.Content>
-            <Button negative onClick={props.closeModal} > Cancel </Button> 
-            <Button positive onClick={props.onConfirm} > Confirm </Button> 
+            <Button size="huge" positive onClick={props.onConfirm}>
+                Confirm 
+            </Button> 
             </Modal>
       </Transition>
     );
@@ -45,7 +50,6 @@ CropModal.propTypes = {
     isModalOpen: PropTypes.bool,
     closeModal: PropTypes.func,
     image: PropTypes.any,
-    onImageLoaded: PropTypes.func,
     setCompletedCrop: PropTypes.func,
     onConfirm: PropTypes.func,
 }

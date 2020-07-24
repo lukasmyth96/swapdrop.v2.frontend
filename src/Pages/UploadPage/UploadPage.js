@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState } from "react";
 import 'react-image-crop/dist/ReactCrop.css';
 import { Button, Form, Message } from "semantic-ui-react";
 
@@ -15,7 +15,6 @@ const UploadPage = (props) => {
   const [imageFile, setImageFile] = useState();
   const [completedCrop, setCompletedCrop] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const imageRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -31,11 +30,6 @@ const UploadPage = (props) => {
       reader.readAsDataURL(e.target.files[0]);
     }
   };
-
-  const onImageLoaded = useCallback(img => {
-    console.log('OnImageLoaded called!!!')
-    imageRef.current = img;
-  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -75,7 +69,6 @@ const UploadPage = (props) => {
         isModalOpen={isModalOpen}
         closeModal={() => setIsModalOpen(false)}
         image={imageData}
-        onImageLoad={onImageLoaded}
         setCompletedCrop={setCompletedCrop}
         onConfirm={() => onCropComplete()}
       />

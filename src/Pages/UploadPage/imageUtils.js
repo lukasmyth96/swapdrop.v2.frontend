@@ -29,7 +29,7 @@ export function getCroppedImage(image, crop, fileName, extension) {
       canvas.toBlob(blob => {
         const file = new File([blob], fileName)
         resolve(file);
-      }, `image/${extension}`);
+      }, `image/`);
     });
   }
 
