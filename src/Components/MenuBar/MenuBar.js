@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 
 import styles from "./MenuBar.module.css";
+import { NavbarBrand } from "react-bootstrap";
 
 class MenuBar extends Component {
   render() {
@@ -16,10 +17,7 @@ class MenuBar extends Component {
           <span className={styles.logo}>Swapdrop</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse
-          className="justify-content-center"
-          id="basic-navbar-nav"
-        >
+        <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
           <Nav activeKey="/home">
             <Nav.Item>
               <Nav.Link>
@@ -33,6 +31,7 @@ class MenuBar extends Component {
                 </Link>
               </Nav.Link>
             </Nav.Item>
+
             <Nav.Item>
               <Nav.Link>
                 <Link to="/ourmission">
@@ -40,6 +39,10 @@ class MenuBar extends Component {
                 </Link>
               </Nav.Link>
             </Nav.Item>
+          </Nav>
+        </Navbar.Collapse>
+        <Navbar.Collapse className="justify-content-end">
+          <Nav>
             <Nav.Item>
               <Button
                 className={styles.button}
