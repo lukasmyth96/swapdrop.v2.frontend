@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Icon, Image, Loader, Placeholder } from "semantic-ui-react";
+import { Card, Image, Placeholder } from "semantic-ui-react";
 
 import styles from "./ProductDetail.module.css";
 import ErrorMessage from "../../Components/ErrorMessage/ErrorMessage";
