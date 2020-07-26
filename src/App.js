@@ -3,17 +3,17 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
-import PrivateRoute from "./hoc/PrivateRoute"
+import PrivateRoute from "./hoc/PrivateRoute";
 import LandingPage from "./Pages/LandingPage/LandingPage";
 import LogIn from "./Pages/LogIn/LogIn";
 import SignUp from "./Pages/SignUp/SignUp";
 import Profile from "./Pages/Profile/Profile";
 import UploadPage from "./Pages/UploadPage/UploadPage";
+import WhySwap from "./Pages/WhySwap/WhySwap";
+import OurMission from "./Pages/OurMission/OurMission";
 
 class App extends Component {
- 
   render() {
-
     return (
       <div>
         <Router>
@@ -21,6 +21,8 @@ class App extends Component {
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/login" component={LogIn} />
             <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/whyswap" component={WhySwap} />
+            <Route exact path="/ourmission" component={OurMission} />
 
             <PrivateRoute>
               <Route exact path="/profile" component={Profile} />

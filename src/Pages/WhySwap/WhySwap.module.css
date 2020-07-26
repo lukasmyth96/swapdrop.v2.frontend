@@ -1,0 +1,40 @@
+.upperContainer {
+  background: transparent url("../../img/Rectangle 1147.png") 0% 0% no-repeat
+    padding-box;
+  width: 100vw;
+  height: 40vh;
+  background-size: 100% 100%;
+}
+
+.centerText {
+  font: Bold 35px/43px Montserrat;
+  color: #ffffff;
+  text-align: center;
+}
+.textBox {
+  top: 10vh;
+  left: 40vw;
+  width: 30vw;
+  height: 20vh;
+  background: transparent #b31010 0% 0%;
+
+  position: relative;
+  /*box-shadow: 0px 3px 13px #00000029;*/
+  overflow: hidden;
+}
+
+.cardText {
+  text-align: left;
+  font: 14px/18px Montserrat;
+  letter-spacing: 0px;
+  color: #4e4e4e;
+}
+
+.cardBox {
+  margin-top: 5vh;
+  background: transparent #b31010 0% 0%;
+
+  position: relative;
+  /*box-shadow: 0px 3px 13px #00000029;*/
+  overflow: hidden;
+}
