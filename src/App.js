@@ -28,7 +28,11 @@ class App extends Component {
             <PrivateRoute>
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/upload" component={UploadPage} />
-              <Route exact path="/products/:productId" component={ProductDetail}/>
+              <Route
+                exact
+                path="/products/:productId"
+                component={ProductDetail}
+              />
             </PrivateRoute>
           </Switch>
         </Router>

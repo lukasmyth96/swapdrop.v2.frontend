@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Card, Icon, Image, Loader, Placeholder } from "semantic-ui-react";
 
 import styles from "./ProductDetail.module.css";
-
+import ErrorMessage from "../../Components/ErrorMessage/ErrorMessage";
 import axios from "../../axiosInstance";
 
 const ProductDetail = (props) => {
   const [product, setProduct] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState();
 
   useEffect(() => {
     const productId = props.match.params.productId;
@@ -20,7 +21,7 @@ const ProductDetail = (props) => {
         setProduct(response.data);
       })
       .catch((error) => {
-        alert("Something went wrong");
+        setError(error);
       })
       .finally(() => {
         setIsLoading(false);
@@ -28,31 +29,37 @@ const ProductDetail = (props) => {
   }, []);
 
   return (
-    <div className={styles.CardContainer}>
-      <Card centered style={{ width: "100%" }}>
-        {isLoading ? (
-          <Placeholder>
-            <Placeholder.Image square />
-          </Placeholder>
-        ) : (
-          <Image src={product.image1} />
-        )}
+    <>
+    { error ?
+      <ErrorMessage error={error}/> 
+      :
+        <div className={styles.CardContainer}>
+          <Card centered style={{ width: "100%" }}>
+            {isLoading ? (
+              <Placeholder>
+                <Placeholder.Image square />
+              </Placeholder>
+            ) : (
+              <Image src={product.image1} />
+            )}
 
-        <Card.Content>
-          {isLoading ? (
-            <Placeholder>
-              <Placeholder.Header>
-                <Placeholder.Line length="medium" />
-              </Placeholder.Header>
-            </Placeholder>
-          ) : (
-            <>
-              <Card.Header>{product.title}</Card.Header>
-            </>
-          )}
-        </Card.Content>
-      </Card>
-    </div>
+            <Card.Content>
+              {isLoading ? (
+                <Placeholder>
+                  <Placeholder.Header>
+                    <Placeholder.Line length="medium" />
+                  </Placeholder.Header>
+                </Placeholder>
+              ) : (
+                <>
+                  <Card.Header>{product.title}</Card.Header>
+                </>
+              )}
+            </Card.Content>
+          </Card>
+        </div>
+    }
+    </>
   );
 };
 
