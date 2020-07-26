@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Icon, Image, Loader } from "semantic-ui-react";
+import { Card, Icon, Image, Loader, Placeholder } from "semantic-ui-react";
 
 import styles from "./ProductDetail.module.css";
 
@@ -29,16 +29,29 @@ const ProductDetail = (props) => {
 
   return (
     <div className={styles.CardContainer}>
-      {isLoading ? (
-        <Loader active inline="centered" />
-      ) : (
-        <Card className={styles.Card}>
-          <Image src={product.image1} wrapped ui={false} />
-          <Card.Content>
-            <Card.Header>{product.title}</Card.Header>
-          </Card.Content>
-        </Card>
-      )}
+      <Card centered style={{ width: "100%" }}>
+        {isLoading ? (
+          <Placeholder>
+            <Placeholder.Image square />
+          </Placeholder>
+        ) : (
+          <Image src={product.image1} />
+        )}
+
+        <Card.Content>
+          {isLoading ? (
+            <Placeholder>
+              <Placeholder.Header>
+                <Placeholder.Line length="medium" />
+              </Placeholder.Header>
+            </Placeholder>
+          ) : (
+            <>
+              <Card.Header>{product.title}</Card.Header>
+            </>
+          )}
+        </Card.Content>
+      </Card>
     </div>
   );
 };

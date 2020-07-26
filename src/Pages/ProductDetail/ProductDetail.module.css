@@ -1,7 +1,4 @@
-.CardContainer{
-    text-align: center;
-}
-
-.Card{
-    width: 50%;
+.CardContainer {
+  margin: 100px auto 0px auto;
+  width: 40%;
 }
