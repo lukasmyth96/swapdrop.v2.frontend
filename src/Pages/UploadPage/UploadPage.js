@@ -38,7 +38,7 @@ const UploadPage = (props) => {
     axios
       .post("/products/", data, {
         headers: {
-          Authorization: `JWT ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
           "content-type": "multipart/form-data",
         },
       })

@@ -27,7 +27,9 @@ const SignUp = (props) => {
     }
     axios.post("/users/", data)
       .then((response) => {
-        localStorage.setItem('token', response.data.token);
+        const { access, refresh } = response.data.token;
+        localStorage.setItem('access', access);
+        localStorage.setItem('refresh', refresh);
         props.history.push("/profile");
       })
       .catch(error => setErrors(error.response.data))

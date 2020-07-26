@@ -11,6 +11,7 @@ import Profile from "./Pages/Profile/Profile";
 import UploadPage from "./Pages/UploadPage/UploadPage";
 import WhySwap from "./Pages/WhySwap/WhySwap";
 import OurMission from "./Pages/OurMission/OurMission";
+import ProductDetail from "./Pages/ProductDetail/ProductDetail";
 
 class App extends Component {
   render() {
@@ -27,6 +28,11 @@ class App extends Component {
             <PrivateRoute>
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/upload" component={UploadPage} />
+              <Route
+                exact
+                path="/products/:productId"
+                component={ProductDetail}
+              />
             </PrivateRoute>
           </Switch>
         </Router>
