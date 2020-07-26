@@ -15,7 +15,7 @@ const ProductDetail = (props) => {
     setIsLoading(true);
     axios
       .get(`/products/${productId}`, {
-        headers: { Authorization: `JWT ${localStorage.getItem("token")}` },
+        headers: { Authorization: `Bearer ${localStorage.getItem("access")}` },
       })
       .then((response) => {
         setProduct(response.data);

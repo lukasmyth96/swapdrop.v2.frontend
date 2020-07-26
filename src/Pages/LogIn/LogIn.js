@@ -19,9 +19,10 @@ const SignUp = (props) => {
       username: username,
       password: password
     }
-    axios.post("/token-auth/", data)
+    axios.post("/api/token/", data)
       .then((response) => {
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('access', response.data.access);
+        localStorage.setItem('refresh', response.data.refresh);
         props.history.push("/profile");
       })
       .catch(error => setErrors(error.response.data))

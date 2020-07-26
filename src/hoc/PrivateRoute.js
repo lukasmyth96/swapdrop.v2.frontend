@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 
 const PrivateRoute = (props) => {
 
-    const authenticated = localStorage.getItem("token") !== null;
+    const authenticated = localStorage.getItem("access") !== null;
     return (
         <>
         { authenticated ? props.children : <Redirect to="/" /> }
