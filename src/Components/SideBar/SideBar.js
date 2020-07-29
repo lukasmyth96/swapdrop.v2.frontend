@@ -26,18 +26,11 @@ const VerticalSidebar = ({ animation, direction, visible }) => (
     visible={visible}
     width="thin"
   >
-    <Menu.Item as="a">
-      <Icon name="home" />
-      Home
-    </Menu.Item>
-    <Menu.Item as="a">
-      <Icon name="gamepad" />
-      Games
-    </Menu.Item>
-    <Menu.Item as="a">
-      <Icon name="camera" />
-      Channels
-    </Menu.Item>
+    <Menu.Item as="a">Shipping Address</Menu.Item>
+    <Menu.Item as="a">FAQs</Menu.Item>
+    <Menu.Item as="a">Terms of Service</Menu.Item>
+    <Menu.Item as="a">Privacy Agreement</Menu.Item>
+    <Menu.Item></Menu.Item>
   </Sidebar>
 );
 
@@ -65,6 +58,7 @@ class SideBar extends Component {
         <Icon
           link
           name="bars"
+          size="big"
           onClick={this.handleAnimationChange("overlay")}
         />
 

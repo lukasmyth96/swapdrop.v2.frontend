@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Menu, Segment } from "semantic-ui-react";
 
 import SideBar from "../SideBar/SideBar";
+import styles from "./MenuBarLI.module.css";
 
 export default class MenuBarLI extends Component {
   state = { activeItem: "home" };
@@ -14,25 +15,24 @@ export default class MenuBarLI extends Component {
     return (
       <div>
         <Menu pointing secondary>
+          <Menu.Item className={styles.text}>Swapdrop</Menu.Item>
+
           <Menu.Item
-            name="home"
-            active={activeItem === "home"}
+            className={styles.text}
+            name="Feed"
+            active={activeItem === "Feed"}
             onClick={this.handleItemClick}
           />
           <Menu.Item
-            name="messages"
-            active={activeItem === "messages"}
+            className={styles.text}
+            name="Profile"
+            active={activeItem === "Profile"}
             onClick={this.handleItemClick}
           />
-          <Menu.Item
-            name="friends"
-            active={activeItem === "friends"}
-            onClick={this.handleItemClick}
-          />
+
           <Menu.Menu position="right">
             <Menu.Item>
               <SideBar />
-              {this.props.HelloWorld2}
             </Menu.Item>
           </Menu.Menu>
         </Menu>
