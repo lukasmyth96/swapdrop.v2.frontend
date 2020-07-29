@@ -18,7 +18,7 @@ const Feed = (props) => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`/products/`, {
+      .get(`/feed/`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("access")}` },
       })
       .then((response) => {
