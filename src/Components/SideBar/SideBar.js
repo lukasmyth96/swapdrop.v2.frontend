@@ -16,22 +16,40 @@ import {
 import styles from "./SideBar.modules.css";
 
 const VerticalSidebar = ({ animation, direction, visible }) => (
-  <Sidebar
-    as={Menu}
-    animation={animation}
-    direction={direction}
-    icon="labeled"
-    inverted
-    vertical
-    visible={visible}
-    width="thin"
-  >
-    <Menu.Item as="a">Shipping Address</Menu.Item>
-    <Menu.Item as="a">FAQs</Menu.Item>
-    <Menu.Item as="a">Terms of Service</Menu.Item>
-    <Menu.Item as="a">Privacy Agreement</Menu.Item>
-    <Menu.Item></Menu.Item>
-  </Sidebar>
+  <>
+    <Sidebar
+      as={Menu}
+      animation={animation}
+      direction={direction}
+      icon="labeled"
+      inverted
+      vertical
+      visible={visible}
+      width="thin"
+    >
+      <ui>
+        <Menu.Item as="a">
+          <Icon name="map marker alternate" />
+          Shipping Address
+        </Menu.Item>
+
+        <Menu.Item as="a">
+          {" "}
+          <Icon name="question circle outline" /> FAQs
+        </Menu.Item>
+
+        <Menu.Item as="a">
+          <Icon name="file alternate outline" />
+          Terms of Service
+        </Menu.Item>
+        <Menu.Item as="a">
+          <Icon name="privacy" />
+          Privacy Agreement
+        </Menu.Item>
+        <Menu.Item as="a"></Menu.Item>
+      </ui>
+    </Sidebar>
+  </>
 );
 
 VerticalSidebar.propTypes = {
