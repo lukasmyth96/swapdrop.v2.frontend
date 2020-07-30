@@ -8,6 +8,16 @@ import ErrorMessage from "../../Components/ErrorMessage/ErrorMessage";
 import axios from "../../axiosInstance";
 import MenuBarLI from "../../Components/MenuBarLoggedIn/MenuBarLI";
 import SideBar from "../../Components/SideBar/SideBar";
+import {
+  Checkbox,
+  Grid,
+  Header,
+  Icon,
+  Image,
+  Menu,
+  Segment,
+  Sidebar,
+} from "semantic-ui-react";
 
 const Profile = (props) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -34,7 +44,6 @@ const Profile = (props) => {
   return (
     <>
       <MenuBarLI />
-
       <div style={{ textAlign: "center" }}>
         <h1>Welcome to your profile</h1>
         <Link to="/upload">

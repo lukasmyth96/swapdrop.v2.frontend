@@ -1,17 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {
-  Button,
-  Checkbox,
-  Grid,
-  Header,
-  Icon,
-  Image,
-  Menu,
-  Segment,
-  Ref,
-  Sidebar,
-} from "semantic-ui-react";
+import { Icon, Menu, Sidebar } from "semantic-ui-react";
 
 import styles from "./SideBar.modules.css";
 
@@ -46,7 +35,10 @@ const VerticalSidebar = ({ animation, direction, visible }) => (
           <Icon name="privacy" />
           Privacy Agreement
         </Menu.Item>
-        <Menu.Item as="a"></Menu.Item>
+        <Menu.Item as="a">
+          <Icon name="arrow alternate circle right outline" />
+          Logout
+        </Menu.Item>
       </ui>
     </Sidebar>
   </>
@@ -84,7 +76,6 @@ class SideBar extends Component {
           animation={animation}
           direction={direction}
           visible={visible}
-          dimmed={dimmed}
         />
       </div>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Menu, Segment, Container } from "semantic-ui-react";
+import { Menu, Container, Sticky, } from "semantic-ui-react";
 
 import SideBar from "../SideBar/SideBar";
 import styles from "./MenuBarLI.module.css";
@@ -14,41 +14,47 @@ export default class MenuBarLI extends Component {
 
     return (
       <div>
-        <Menu pointing secondary>
-          <Menu.Item className={styles.text}>Swapdrop</Menu.Item>
-          <Container
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div className="center aligned row">
-              <div className="center aligned col">
-                <Menu.Item
-                  className={styles.text}
-                  name="Feed"
-                  active={activeItem === "Feed"}
-                  onClick={this.handleItemClick}
-                />
-              </div>
-              <div className="center aligned col">
-                <Menu.Item
-                  className={styles.text}
-                  name="Profile"
-                  active={activeItem === "Profile"}
-                  onClick={this.handleItemClick}
-                />
-              </div>
-            </div>
-          </Container>
-
-          <Menu.Menu position="right">
+        <Sticky>
+          <Menu pointing primary>
             <Menu.Item>
-              <SideBar />
+              <span className={styles.swapdrop}>Swapdrop</span>
             </Menu.Item>
-          </Menu.Menu>
-        </Menu>
+            <Container
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <div className="center aligned row">
+                <div className="center aligned col">
+                  <Menu.Item
+                    name="Feed"
+                    active={activeItem === "Feed"}
+                    onClick={this.handleItemClick}
+                  >
+                    <span className={styles.text}>Feed</span>
+                  </Menu.Item>
+                </div>
+                <div className="center aligned col">
+                  <Menu.Item
+                    name="Profile"
+                    active={activeItem === "Profile"}
+                    onClick={this.handleItemClick}
+                  >
+                    <span className={styles.text}>Profile</span>
+                  </Menu.Item>
+                </div>
+              </div>
+            </Container>
+
+            <Menu.Menu position="right">
+              <Menu.Item>
+                <SideBar />
+              </Menu.Item>
+            </Menu.Menu>
+          </Menu>
+        </Sticky>
       </div>
     );
   }
