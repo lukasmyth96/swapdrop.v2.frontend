@@ -1,22 +1,30 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { Icon, Menu, Sidebar } from "semantic-ui-react";
 
-import styles from "./SideBar.modules.css";
+const SideBarTest = () => {
+  const [visible, setVisible] = React.useState(false);
 
-const VerticalSidebar = ({ animation, direction, visible }) => (
-  <>
-    <Sidebar
-      as={Menu}
-      animation={animation}
-      direction={direction}
-      icon="labeled"
-      inverted
-      vertical
-      visible={visible}
-      width="thin"
-    >
-      <ui>
+  return (
+    <>
+      <Icon
+        link
+        name="bars"
+        size="big"
+        label={{ children: <code>visible</code> }}
+        onClick={() => setVisible(true)}
+      />
+      <Sidebar
+        as={Menu}
+        animation="overlay"
+        icon="labeled"
+        direction="right"
+        inverted
+        onHide={() => setVisible(false)}
+        vertical
+        visible={visible}
+        width="thin"
+        animation="push"
+      >
         <Menu.Item as="a">
           <Icon name="map marker alternate" />
           Shipping Address
@@ -39,47 +47,9 @@ const VerticalSidebar = ({ animation, direction, visible }) => (
           <Icon name="arrow alternate circle right outline" />
           Logout
         </Menu.Item>
-      </ui>
-    </Sidebar>
-  </>
-);
-
-VerticalSidebar.propTypes = {
-  animation: PropTypes.string,
-  direction: PropTypes.string,
-  visible: PropTypes.bool,
+      </Sidebar>
+    </>
+  );
 };
 
-class SideBar extends Component {
-  state = {
-    animation: "overlay",
-    direction: "right",
-    dimmed: true,
-    visible: false,
-  };
-  handleAnimationChange = (animation) => () =>
-    this.setState((prevState) => ({ animation, visible: !prevState.visible }));
-
-  render() {
-    const { animation, dimmed, direction, visible } = this.state;
-
-    return (
-      <div>
-        <Icon
-          link
-          name="bars"
-          size="big"
-          onClick={this.handleAnimationChange("overlay")}
-        />
-
-        <VerticalSidebar
-          animation={animation}
-          direction={direction}
-          visible={visible}
-        />
-      </div>
-    );
-  }
-}
-
-export default SideBar;
+export default SideBarTest;

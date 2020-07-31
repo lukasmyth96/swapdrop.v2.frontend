@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Menu, Container, Sticky, } from "semantic-ui-react";
+import { Menu, Container, Sticky } from "semantic-ui-react";
 
 import SideBar from "../SideBar/SideBar";
 import styles from "./MenuBarLI.module.css";
