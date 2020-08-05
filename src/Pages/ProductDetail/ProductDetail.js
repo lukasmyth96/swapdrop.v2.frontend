@@ -12,8 +12,9 @@ const ProductDetail = (props) => {
   const [error, setError] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const productId = props.match.params.productId;
+
   useEffect(() => {
-    const productId = props.match.params.productId;
     setIsLoading(true);
     axios
       .get(`/products/${productId}`, {
@@ -28,12 +29,13 @@ const ProductDetail = (props) => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [props.match.params.productId]);
+  }, [productId]);
 
   const makeOfferModal = isModalOpen && (
     <MakeOfferModal
       isModalOpen={isModalOpen}
       closeModal={() => setIsModalOpen(false)}
+      desiredProductId = {productId}
     />
   )
 
