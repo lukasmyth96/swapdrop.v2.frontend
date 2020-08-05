@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Card, Image, Placeholder } from "semantic-ui-react";
+import { Card, Button, Image, Placeholder } from "semantic-ui-react";
 
 import styles from "./ProductDetail.module.css";
 import ErrorMessage from "../../Components/ErrorMessage/ErrorMessage";
+import MakeOfferModal from "../../Components/MakeOfferModal/MakeOfferModal"
 import axios from "../../axiosInstance";
 
 const ProductDetail = (props) => {
   const [product, setProduct] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const productId = props.match.params.productId;
@@ -26,39 +28,55 @@ const ProductDetail = (props) => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [props.match.params.productId]);
+
+  const makeOfferModal = isModalOpen && (
+    <MakeOfferModal
+      isModalOpen={isModalOpen}
+      closeModal={() => setIsModalOpen(false)}
+    />
+  )
 
   return (
     <>
-    { error ?
-      <ErrorMessage error={error}/> 
-      :
-        <div className={styles.CardContainer}>
-          <Card centered style={{ width: "100%" }}>
-            {isLoading ? (
-              <Placeholder>
-                <Placeholder.Image square />
-              </Placeholder>
-            ) : (
-              <Image src={product.image1} />
-            )}
-
-            <Card.Content>
+      {error ?
+        <ErrorMessage error={error} />
+        :
+        <>
+          {makeOfferModal}
+          <div className={styles.CardContainer}>
+            <Card centered style={{ width: "100%" }}>
               {isLoading ? (
                 <Placeholder>
-                  <Placeholder.Header>
-                    <Placeholder.Line length="medium" />
-                  </Placeholder.Header>
+                  <Placeholder.Image square />
                 </Placeholder>
               ) : (
-                <>
-                  <Card.Header>{product.title}</Card.Header>
-                </>
-              )}
-            </Card.Content>
-          </Card>
-        </div>
-    }
+                  <Image src={product.image1} />
+                )}
+
+              <Card.Content>
+                {isLoading ? (
+                  <Placeholder>
+                    <Placeholder.Header>
+                      <Placeholder.Line length="medium" />
+                    </Placeholder.Header>
+                  </Placeholder>
+                ) : (
+                    <>
+                      <Card.Header>{product.title}</Card.Header>
+                      <Button
+                        positive
+                        content='Make Offer'
+                        icon='right arrow'
+                        labelPosition='right'
+                        onClick={() => setIsModalOpen(true)} />
+                    </>
+                  )}
+              </Card.Content>
+            </Card>
+          </div>
+        </>
+      }
     </>
   );
 };

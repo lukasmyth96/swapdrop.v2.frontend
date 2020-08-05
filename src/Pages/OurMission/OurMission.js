@@ -9,7 +9,6 @@ import CardDeck from "react-bootstrap/CardDeck";
 import Container from "react-bootstrap/Container";
 
 import Modal from "react-bootstrap/Modal";
-import ModalBody from "react-bootstrap/ModalBody";
 import Button from "react-bootstrap/Button";
 
 import Plant from "../../img/green-leaf-plant-on-pot-824572.png";
@@ -45,7 +44,7 @@ class OurMission extends Component {
               </div>
               <div className="col-2">
                 <div className={styles.plantPictureBox}>
-                  <img src={Plant} alt={"picture of plant"} />
+                  <img src={Plant} alt="plant" />
                 </div>
               </div>
             </div>
