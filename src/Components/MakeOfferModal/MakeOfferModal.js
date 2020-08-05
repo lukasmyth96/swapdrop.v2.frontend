@@ -68,15 +68,13 @@ const MakeOfferModal = (props) => {
     return (
         <Transition visible={props.isModalOpen} animation="scale" duration={500}>
             <Modal
-            scrolling
-            image
             style={modalStyle}
             open={props.isModalOpen}
             onClose={() => props.closeModal()}>
                 <Modal.Header>
                     Testing...
                 </Modal.Header>
-                <Modal.Content>
+                <Modal.Content scrolling>
                     <Grid centered>
                         {images}
                     </Grid>
