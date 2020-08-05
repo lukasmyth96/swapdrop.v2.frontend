@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types'
 import { Button, Icon, Grid, Placeholder, Image, Transition, Modal } from "semantic-ui-react";
 
 import axios from "../../axiosInstance";
+import styles from "./MakeOfferModal.module.css"
 
 const MakeOfferModal = (props) => {
 
@@ -50,17 +50,19 @@ const MakeOfferModal = (props) => {
     };
 
     const images = products.map((product, idx) => (
-        <Grid.Column style={{marginTop: "20px"}} mobile={16} tablet={8} computer={4}>
+        <Grid.Column key={idx} style={{marginTop: "20px"}} mobile={16} tablet={8} computer={4}>
             {isLoading ? (
                 <Placeholder>
-                <Placeholder.Image square />
+                    <Placeholder.Image square />
                 </Placeholder>
             ) : (
-                <Button
-                 onClick={() => toggleSelectedProduct(product.id) }
-                 style={selectedProducts.includes(product.id) ? {backgroundColor: "red"}: null}>
-                    <Image style={{width: "100%"}} src={product.image1} />
-                </Button>
+                <span
+                 onClick={() => toggleSelectedProduct(product.id) }>
+                    <Image
+                     src={product.image1}
+                     style={selectedProducts.includes(product.id) ? {boxShadow: "0 0 25px orange"}: null}
+                     />
+                </span>
             )}
         </Grid.Column>
     ));
@@ -72,7 +74,7 @@ const MakeOfferModal = (props) => {
             open={props.isModalOpen}
             onClose={() => props.closeModal()}>
                 <Modal.Header>
-                    Testing...
+                    Select which items you're willing to swap
                 </Modal.Header>
                 <Modal.Content scrolling>
                     <Grid centered>
