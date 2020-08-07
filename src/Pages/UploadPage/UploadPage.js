@@ -7,6 +7,7 @@ import styles from "../SignUp/SignUp.module.css";
 import CropModal from "../../Components/CropModal/CropModal"
 import FileUploadButton from "../../Components/FileUploadButton/FileUploadButton"
 import { getCroppedImage, extractImageFileExtensionFromBase64 } from './imageUtils'
+import MenuBarLoggedIn from "../../Components/MenuBarLoggedIn/MenuBarLoggedIn";
 
 const UploadPage = (props) => {
   const [title, setTitle] = useState("");
@@ -62,6 +63,7 @@ const UploadPage = (props) => {
 
   return (
     <>
+    <MenuBarLoggedIn/>
       <CropModal
         isModalOpen={isModalOpen}
         closeModal={() => setIsModalOpen(false)}

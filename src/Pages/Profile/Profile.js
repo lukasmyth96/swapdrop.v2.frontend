@@ -1,16 +1,14 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   Button,
-  SidebarPushable,
-  SidebarPusher,
   Segment,
 } from "semantic-ui-react";
 
 import FeedGrid from "../../Components/FeedGrid/FeedGrid";
 import ErrorMessage from "../../Components/ErrorMessage/ErrorMessage";
 import axios from "../../axiosInstance";
-import MenuBarLI from "../../Components/MenuBarLoggedIn/MenuBarLI";
+import MenuBarLoggedIn from "../../Components/MenuBarLoggedIn/MenuBarLoggedIn";
 
 const Profile = (props) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -36,7 +34,7 @@ const Profile = (props) => {
 
   return (
     <>
-      <MenuBarLI />
+      <MenuBarLoggedIn />
 
       <Segment>
         <div style={{ textAlign: "center" }}>

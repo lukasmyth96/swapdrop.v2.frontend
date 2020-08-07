@@ -1,7 +1,7 @@
 import React from "react";
 import { Icon, Menu, Sidebar } from "semantic-ui-react";
 
-const SideBarTest = () => {
+const SideBar = () => {
   const [visible, setVisible] = React.useState(false);
 
   return (
@@ -23,7 +23,6 @@ const SideBarTest = () => {
         vertical
         visible={visible}
         width="thin"
-        animation="push"
       >
         <Menu.Item as="a">
           <Icon name="map marker alternate" />
@@ -52,4 +51,4 @@ const SideBarTest = () => {
   );
 };
 
-export default SideBarTest;
+export default SideBar;
