@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import FeedGrid from '../../Components/FeedGrid/FeedGrid'
 import ErrorMessage from "../../Components/ErrorMessage/ErrorMessage";
 import axios from "../../axiosInstance";
+import MenuBarLoggedIn from "../../Components/MenuBarLoggedIn/MenuBarLoggedIn";
 
 const Feed = (props) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,6 +29,7 @@ const Feed = (props) => {
 
   return (
     <>
+    <MenuBarLoggedIn/>
       {error ? (
         <ErrorMessage error={error} />
       ) : (

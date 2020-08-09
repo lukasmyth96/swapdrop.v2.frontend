@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "semantic-ui-react"
+import {
+  Button,
+  Segment,
+} from "semantic-ui-react";
 
-import FeedGrid from '../../Components/FeedGrid/FeedGrid'
+import FeedGrid from "../../Components/FeedGrid/FeedGrid";
 import ErrorMessage from "../../Components/ErrorMessage/ErrorMessage";
 import axios from "../../axiosInstance";
+import MenuBarLoggedIn from "../../Components/MenuBarLoggedIn/MenuBarLoggedIn";
 
 const Profile = (props) => {
-
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
   const [products, setProducts] = useState([]);
@@ -29,9 +32,12 @@ const Profile = (props) => {
       });
   }, []);
 
-    return (
-      <>  
-        <div style={{textAlign: "center"}}>
+  return (
+    <>
+      <MenuBarLoggedIn />
+
+      <Segment>
+        <div style={{ textAlign: "center" }}>
           <h1>Welcome to your profile</h1>
           <Link to="/upload">
             <Button positive size="huge">
@@ -43,11 +49,12 @@ const Profile = (props) => {
           {error ? (
             <ErrorMessage error={error} />
           ) : (
-              <FeedGrid products={products} isLoading={isLoading} />
-            )}
+            <FeedGrid products={products} isLoading={isLoading} />
+          )}
         </div>
-      </>
-    );
-}
+      </Segment>
+    </>
+  );
+};
 
 export default Profile;

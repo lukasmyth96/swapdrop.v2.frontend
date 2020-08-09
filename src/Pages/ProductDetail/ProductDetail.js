@@ -4,6 +4,7 @@ import { Card, Image, Placeholder } from "semantic-ui-react";
 import styles from "./ProductDetail.module.css";
 import ErrorMessage from "../../Components/ErrorMessage/ErrorMessage";
 import axios from "../../axiosInstance";
+import MenuBarLoggedIn from "../../Components/MenuBarLoggedIn/MenuBarLoggedIn";
 
 const ProductDetail = (props) => {
   const [product, setProduct] = useState();
@@ -30,6 +31,7 @@ const ProductDetail = (props) => {
 
   return (
     <>
+    <MenuBarLoggedIn/>
     { error ?
       <ErrorMessage error={error}/> 
       :
