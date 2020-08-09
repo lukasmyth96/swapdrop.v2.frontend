@@ -3,7 +3,7 @@ import { Menu, Container, Sticky } from "semantic-ui-react";
 import { Link, NavLink } from "react-router-dom";
 
 import SideBar from "../SideBar/SideBar";
-import styles from "./MenuBarLI.module.css";
+import styles from "./MenuBarLoggedIn.module.css";
 
 const MenuBarLoggedIn = () => {
   return (
@@ -12,7 +12,7 @@ const MenuBarLoggedIn = () => {
         <Menu pointing primary>
           <Menu.Item>
             <Link to="/">
-              <span className={styles.swapdrop}>Swapdrop</span>
+              <span className={styles.homepageNavlink}>Swapdrop</span>
             </Link>
           </Menu.Item>
           <Container
@@ -26,14 +26,14 @@ const MenuBarLoggedIn = () => {
               <div className="center aligned col">
                 <Menu.Item>
                   <NavLink to="/feed">
-                    <span className={styles.text}>Feed</span>
+                    <span className={styles.mainTabNavlinks}>Feed</span>
                   </NavLink>
                 </Menu.Item>
               </div>
               <div className="center aligned col">
                 <Menu.Item>
                   <NavLink to="/profile">
-                    <span className={styles.text}>Profile</span>
+                    <span className={styles.mainTabNavlinks}>Profile</span>
                   </NavLink>
                 </Menu.Item>
               </div>

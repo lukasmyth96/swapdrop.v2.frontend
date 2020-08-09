@@ -1,14 +1,10 @@
-.text {
+.mainTabNavlinks {
   font: "Montserrat";
   font-size: 25px;
   font-weight: 900;
 }
 
-.offSet {
-  margin-left: 30vw;
-}
-
-.swapdrop {
+.homepageNavlink {
   color: #ff5510;
   font: "Montserrat";
   font-size: 30px;
