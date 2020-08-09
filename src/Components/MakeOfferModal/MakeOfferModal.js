@@ -43,7 +43,10 @@ const MakeOfferModal = (props) => {
         })
         .then(() => {
             props.closeModal();
-            props.history.push('/profile');
+            props.history.push('/feed');
+        })
+        .catch((error) => {
+            setError(error);
         })
         .finally(() => setIsOfferSending(false))
 
@@ -92,6 +95,15 @@ const MakeOfferModal = (props) => {
                 <Modal.Header>
                     Select which items you're willing to swap
                 </Modal.Header>
+
+                {error && 
+                <Modal.Description>
+                    <span style={{color: "red", fontWeight: "bolder"}}>
+                        {error.response.data}
+                    </span>
+                </Modal.Description>
+                }
+
                 <Modal.Content scrolling>
                     <Grid centered>
                         {images}
