@@ -5,6 +5,7 @@ import styles from "./ProductDetail.module.css";
 import ErrorMessage from "../../Components/ErrorMessage/ErrorMessage";
 import MakeOfferModal from "../../Components/MakeOfferModal/MakeOfferModal"
 import axios from "../../axiosInstance";
+import MenuBarLoggedIn from "../../Components/MenuBarLoggedIn/MenuBarLoggedIn";
 
 const ProductDetail = (props) => {
   const [product, setProduct] = useState();
@@ -35,12 +36,13 @@ const ProductDetail = (props) => {
     <MakeOfferModal
       isModalOpen={isModalOpen}
       closeModal={() => setIsModalOpen(false)}
-      desiredProductId = {productId}
+      desiredProductId={productId}
     />
   )
 
   return (
     <>
+      <MenuBarLoggedIn />
       {error ?
         <ErrorMessage error={error} />
         :
@@ -48,6 +50,7 @@ const ProductDetail = (props) => {
           {makeOfferModal}
           <div className={styles.CardContainer}>
             <Card centered style={{ width: "100%" }}>
+
               {isLoading ? (
                 <Placeholder>
                   <Placeholder.Image square />
@@ -55,7 +58,7 @@ const ProductDetail = (props) => {
               ) : (
                   <Image src={product.image1} />
                 )}
-
+                
               <Card.Content>
                 {isLoading ? (
                   <Placeholder>
