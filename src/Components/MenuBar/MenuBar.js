@@ -2,12 +2,10 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 
 import styles from "./MenuBar.module.css";
-import { NavbarBrand } from "react-bootstrap";
 
 class MenuBar extends Component {
   render() {
