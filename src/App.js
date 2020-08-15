@@ -13,6 +13,7 @@ import WhySwap from "./Pages/WhySwap/WhySwap";
 import OurMission from "./Pages/OurMission/OurMission";
 import ProductDetail from "./Pages/ProductDetail/ProductDetail";
 import Feed from "./Pages/Feed/Feed";
+import ReviewOffer from "./Pages/ReviewOffer/ReviewOffer";
 
 class App extends Component {
   render() {
@@ -25,7 +26,6 @@ class App extends Component {
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/whyswap" component={WhySwap} />
             <Route exact path="/ourmission" component={OurMission} />
-            
 
             <PrivateRoute>
               <Route exact path="/profile" component={Profile} />
@@ -35,7 +35,8 @@ class App extends Component {
                 path="/products/:productId"
                 component={ProductDetail}
               />
-              <Route exact path="/feed" component={Feed}/>
+              <Route exact path="/feed" component={Feed} />
+              <Route exact path="/review-offer" component={ReviewOffer} />
             </PrivateRoute>
           </Switch>
         </Router>
