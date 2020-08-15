@@ -70,7 +70,6 @@ const ReviewOffer = (props) => {
     axios
       .post(`/offers/accept/`, payload, config)
       .then((response) => {
-        console.log("SUCCEEEEEESSS!");
         props.history.push("/profile");
       })
       .catch((error) => {
