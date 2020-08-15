@@ -16,7 +16,9 @@ const ReviewOffer = (props) => {
   const productId = props.match.params.productId;
 
   useEffect(() => {
-    const config = {headers: { Authorization: `Bearer ${localStorage.getItem("access")}` }};
+    const config = {
+      headers: { Authorization: `Bearer ${localStorage.getItem("access")}` },
+    };
     setIsLoading(true);
     axios
       .get(`/offers/review/${productId}/`, config)
@@ -36,25 +38,50 @@ const ReviewOffer = (props) => {
   };
 
   const handleReject = (offeredProductId) => {
-    const config = {headers: { Authorization: `Bearer ${localStorage.getItem("access")}` }};
+    const config = {
+      headers: { Authorization: `Bearer ${localStorage.getItem("access")}` },
+    };
     const payload = {
       desiredProductId: productId,
       offeredProductId: offeredProductId,
     };
-    axios.post(`/offers/reject/`, payload, config)
-    .then((response) => {
-        const updatedProducts = products.filter(product => product.id !== offeredProductId);
+    axios
+      .post(`/offers/reject/`, payload, config)
+      .then((response) => {
+        const updatedProducts = products.filter(
+          (product) => product.id !== offeredProductId
+        );
         setProducts(updatedProducts);
       })
-    .catch((error) => {
-        window.alert('ERROR!')
+      .catch((error) => {
+        window.alert("ERROR!");
+        setError(error);
+      });
+  };
+
+  const handleAccept = (offeredProductId) => {
+    const config = {
+      headers: { Authorization: `Bearer ${localStorage.getItem("access")}` },
+    };
+    const payload = {
+      desiredProductId: productId,
+      offeredProductId: offeredProductId,
+    };
+    axios
+      .post(`/offers/accept/`, payload, config)
+      .then((response) => {
+        console.log("SUCCEEEEEESSS!");
+        props.history.push("/profile");
+      })
+      .catch((error) => {
+        window.alert("ERROR!");
         setError(error);
       });
   };
 
   const offerCards = products.map((product, idx) => (
     <Carousel.Item>
-      <OfferCard key={idx} product={product} onReject={handleReject} />
+      <OfferCard key={idx} product={product} onReject={handleReject} onAccept={handleAccept} />
     </Carousel.Item>
   ));
 
