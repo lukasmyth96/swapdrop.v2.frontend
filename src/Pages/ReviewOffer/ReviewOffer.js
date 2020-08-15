@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Carousel from "react-bootstrap/Carousel";
-import { Card, Button, Image } from "semantic-ui-react";
 
-import ErrorMessage from "../../Components/ErrorMessage/ErrorMessage";
 import axios from "../../axiosInstance";
 import styles from "./ReviewOffer.module.css";
 import OfferCard from "./OfferCard";
@@ -11,7 +9,7 @@ const ReviewOffer = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([{}]);
 
   const productId = props.match.params.productId;
 
@@ -80,7 +78,7 @@ const ReviewOffer = (props) => {
 
   const offerCards = products.map((product, idx) => (
     <Carousel.Item>
-      <OfferCard key={idx} product={product} onReject={handleReject} onAccept={handleAccept} />
+      <OfferCard key={idx} product={product} onReject={handleReject} onAccept={handleAccept} isLoading={isLoading} nextIcon />
     </Carousel.Item>
   ));
 

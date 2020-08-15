@@ -1,17 +1,25 @@
 import React from "react";
-import { Card, Button, Image } from "semantic-ui-react";
+import { Card, Button, Image, Placeholder } from "semantic-ui-react";
 
 import styles from "./ReviewOffer.module.css";
 
 const OfferCard = (props) => {
   return (
     <Card centered style={{ width: "100%" }}>
-      <Image src={props.product.image1} />
+      {props.isLoading ? (
+        <Placeholder>
+          <Placeholder.Image square />
+        </Placeholder>
+      ) : (
+        <Image src={props.product.image1} />
+      )}
       <Card.Content>
         <div className={styles.carouselContentContainer}>
-          <Card.Header className={styles.header}>
-            {props.product.title}
-          </Card.Header>
+          {props.isLoading ? null : (
+            <Card.Header className={styles.header}>
+              {props.product.title}
+            </Card.Header>
+          )}
           <Button.Group>
             <Button
               negative
