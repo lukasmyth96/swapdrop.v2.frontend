@@ -36,7 +36,7 @@ class App extends Component {
                 component={ProductDetail}
               />
               <Route exact path="/feed" component={Feed} />
-              <Route exact path="/review-offer" component={ReviewOffer} />
+              <Route exact path="/review-offer/:productId" component={ReviewOffer} />
             </PrivateRoute>
           </Switch>
         </Router>
