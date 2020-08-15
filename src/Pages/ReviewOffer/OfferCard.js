@@ -14,7 +14,7 @@ const OfferCard = (props) => {
               {props.product.title}
             </Card.Header>
             <Button.Group>
-              <Button negative size="large">
+              <Button negative size="large" onClick={() => props.onReject(props.product.id)}>
                 Reject
               </Button>
               <Button.Or />
