@@ -1,0 +1,25 @@
+.FormContainer{
+    width: 50%;
+    margin: auto;
+    margin-top: 100px;
+    padding: 50px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+    box-shadow: 1px 5px 5px 5px lightgray;
+    border-radius: 10px;
+  }
+
+.Form{
+    width: 50%
+}
+
+.Field{
+    margin: 25px;
+}
+  
+.centered{
+text-align: center;
+}
